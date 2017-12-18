@@ -6,7 +6,7 @@ const deckStorageKey = '@kgDecks'
 
 export const getDecks = () => (
   AsyncStorage.getItem(deckStorageKey)
-    .then(console.log)
+    .then(JSON.parse)
     .catch(console.error)
 )
 

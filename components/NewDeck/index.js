@@ -1,6 +1,3 @@
-/* eslint "semi": 0 */
-/* eslint "no-console": 0 */
-
 import React, { Component } from 'react'
 import {
   KeyboardAvoidingView,
