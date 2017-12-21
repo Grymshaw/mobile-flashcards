@@ -19,14 +19,12 @@ export const getDeck = id => (
 export const saveDeckTitle = title => (
   AsyncStorage.getItem(deckStorageKey)
     .then((decks) => {
-      console.log('decks', JSON.parse(decks))
       // TODO: Confirm whether or not to replace a deck if it already exists
       return decks
         ? Object.assign({}, JSON.parse(decks), { [title]: { title, questions: [] } })
         : { [title]: { title, questions: [] } }
     })
     .then((newDecks) => {
-      console.log('newDecks', newDecks)
       return AsyncStorage.setItem(deckStorageKey, JSON.stringify(newDecks))
         .catch(err => console.error('setItem error', err))
     })
@@ -35,10 +33,11 @@ export const saveDeckTitle = title => (
 
 export const addCardToDeck = (deckTitle, card) => (
   AsyncStorage.getItem(deckStorageKey)
+    .then(JSON.parse)
     .then((decks) => {
       const deck = decks[deckTitle]
       deck.questions.push(card)
-      const newDecks = Object.assign({}, decks, { title: deck })
+      const newDecks = Object.assign({}, decks, { [deckTitle]: deck })
       AsyncStorage.setItem(deckStorageKey, JSON.stringify(newDecks))
     })
 )

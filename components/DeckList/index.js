@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 
+import Deck from './deck'
+
 import { getDecks } from '../../utils/deckApi'
 import styles from './styles'
 
 export default class DeckList extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: 'My Decks',
+  })
+
   constructor(props) {
     super(props)
     this.state = {
       decks: [],
       loading: true,
     }
-    this.renderDeck = this.renderDeck.bind(this)
     this.renderDecks = this.renderDecks.bind(this)
     this.renderlist = this.renderList.bind(this)
   }
@@ -40,27 +45,19 @@ export default class DeckList extends Component {
     }
   }
 
-  renderDeck(deck) {
-    return (
-      <View
-        key={deck.title}
-        style={styles.listItem}
-      >
-        <Text style={styles.deckTitle}>
-          {deck.title}
-        </Text>
-        <Text style={styles.deckQuestions}>
-          {deck.questions.length} Flashcards
-        </Text>
-      </View>
-    )
-  }
-
   renderDecks() {
     const { decks } = this.state
+    const { navigation } = this.props
+
     return decks.length > 0
       ? <ScrollView style={styles.mainContainer}>
-          {decks.map(this.renderDeck)}
+          {decks.map(deck => (
+            <Deck
+              key={deck.title}
+              deck={deck}
+              navigation={navigation}
+            />
+          ))}
         </ScrollView>
       : <View style={styles.noDecks}>
           <Text>No decks created yet</Text>

@@ -2,9 +2,9 @@ import { StackNavigator, TabNavigator } from 'react-navigation'
 
 import DeckList from '../DeckList'
 import NewDeck from '../NewDeck'
-// import DeckDetails from 'components/DeckDetails'
-// import QuizView from 'components/QuizView'
-// import NewQuestion from 'components/NewQuestion'
+import DeckDetails from '../DeckDetails'
+import QuizView from '../QuizView'
+import NewQuestion from '../NewQuestion'
 
 const Tabs = TabNavigator({
   DeckList: {
@@ -21,7 +21,10 @@ const Tabs = TabNavigator({
   },
 }, {
   navigationOptions: {
-    header: null,
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: '#182026',
+    },
   },
   tabBarPosition: 'bottom',
   tabBarOptions: {
@@ -43,15 +46,28 @@ const MainNavigator = StackNavigator({
   Home: {
     screen: Tabs,
   },
-  // DeckDetails: {
-  //   screen: DeckDetails,
-  // },
-  // QuizView: {
-  //   screen: QuizView,
-  // },
-  // NewQuestion: {
-  //   screen: NewQuestion,
-  // },
+  DeckDetails: {
+    screen: DeckDetails,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#182026',
+      },
+    }
+  },
+  QuizView: {
+    screen: QuizView,
+  },
+  NewQuestion: {
+    screen: NewQuestion,
+  },
+}, {
+  navigationOptions: {
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: '#182026',
+    },
+  },
 })
 
 export default MainNavigator

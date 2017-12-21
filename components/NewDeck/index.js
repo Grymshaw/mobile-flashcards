@@ -9,6 +9,10 @@ import styles from './styles'
 import { saveDeckTitle } from '../../utils/deckApi'
 
 export default class NewDeck extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: 'New Deck',
+  })
+
   constructor(props) {
     super(props)
     this.state = {

@@ -6,6 +6,7 @@ const styles = {
     display: 'flex',
     marginLeft: 15,
     marginRight: 15,
+    marginTop: 10,
   },
   header: {
   },
