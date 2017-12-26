@@ -28,13 +28,15 @@ export default class NewQuestion extends Component {
     const { deck } = this.props.navigation.state.params
     const { answer, question } = this.state
 
-    addCardToDeck(deck.title, { question, answer })
-      .then(() => {
-        this.setState({
-          answer: '',
-          question: '',
+    if (answer.length > 0 && question.length > 0) {
+      addCardToDeck(deck.title, { question, answer })
+        .then(() => {
+          this.setState({
+            answer: '',
+            question: '',
+          })
         })
-      })
+    }
   }
 
   render() {

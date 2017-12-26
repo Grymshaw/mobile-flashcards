@@ -31,7 +31,8 @@ export default class NewDeck extends Component {
   handleSubmit() {
     const { navigation } = this.props
 
-    saveDeckTitle(this.state.title)
+    if (this.state.title.length > 0) {
+      saveDeckTitle(this.state.title)
       .then(() => {
         this.setState({
           title: '',
@@ -39,6 +40,7 @@ export default class NewDeck extends Component {
 
         navigation.navigate('DeckList')
       })
+    }
   }
 
   render() {
