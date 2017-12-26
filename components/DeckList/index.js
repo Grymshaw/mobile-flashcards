@@ -39,10 +39,7 @@ export default class DeckList extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if (this.props.screenProps &&
-      this.props.screenProps.routeIndex !== props.screenProps.routeIndex) {
-        this.updateDecks()
-    }
+    this.updateDecks()
   }
 
   renderDecks() {

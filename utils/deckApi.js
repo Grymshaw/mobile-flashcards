@@ -12,6 +12,7 @@ export const getDecks = () => (
 
 export const getDeck = id => (
   AsyncStorage.getItem(deckStorageKey)
+    .then(JSON.parse)
     .then(decks => decks[id])
     .catch(console.error)
 )

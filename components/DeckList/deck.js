@@ -28,7 +28,7 @@ const Deck = ({ deck, navigation }) => {
           {deck.title}
         </Text>
         <Text style={styles.deckQuestions}>
-          {deck.questions.length} Flashcards
+          {deck.questions.length} Question{deck.questions.length > 1 ? 's' : ''}
         </Text>
       </TouchableOpacity>
     </View>
