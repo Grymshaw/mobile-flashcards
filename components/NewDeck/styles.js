@@ -29,7 +29,11 @@ const styles = {
     paddingRight: 15,
     paddingBottom: 10,
     paddingTop: 10,
-    backgroundColor: 'cyan',
+    backgroundColor: 'teal',
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
   },
 }
 

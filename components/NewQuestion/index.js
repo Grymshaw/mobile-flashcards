@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Text, TextInput, View } from 'react-native'
 
+import styles from './styles'
 import { addCardToDeck } from '../../utils/deckApi'
 
 export default class NewQuestion extends Component {
@@ -27,29 +28,32 @@ export default class NewQuestion extends Component {
     const { deck } = this.props.navigation.state.params
     const { answer, question } = this.state
 
-    addCardToDeck(
-      deck.title,
-      { question, answer },
-    )
-
-    this.setState({
-      answer: '',
-      question: '',
-    })
+    addCardToDeck(deck.title, { question, answer })
+      .then(() => {
+        this.setState({
+          answer: '',
+          question: '',
+        })
+      })
   }
 
   render() {
     const { answer, question } = this.state
+    const { deck } = this.props.navigation.state.params
 
     return (
-      <View>
-        <Text>New Question</Text>
+      <View style={styles.mainContainer}>
+        <Text style={styles.title}>
+          New Question for {deck.title}
+        </Text>
         <TextInput
+          style={styles.input}
           value={question}
           placeholder="Your question here"
           onChangeText={this.handleQuestionInput}
         />
         <TextInput
+          style={styles.input}
           value={answer}
           placeholder="Your answer here"
           onChangeText={this.handleAnswerInput}

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Text, TouchableOpacity, View } from 'react-native'
 
+import styles from './styles'
+
 export default class QuizView extends Component {
   constructor(props) {
     super(props)
@@ -23,8 +25,8 @@ export default class QuizView extends Component {
     const { numberCorrect } = this.state
 
     return (
-      <View>
-        <Text>
+      <View style={styles.score}>
+        <Text style={styles.scoreText}>
           {numberCorrect} / {totalQuestions}
         </Text>
       </View>
@@ -34,12 +36,12 @@ export default class QuizView extends Component {
   renderQuestion (question) {
     const { currentView } = this.state
     return (
-      <View>
+      <View style={styles.mainTextView}>
         { currentView === "question"
-          ? <Text>
+          ? <Text style={styles.mainText}>
               Question: {question.question}
             </Text>
-          : <Text>
+          : <Text style={styles.mainText}>
               Answer: {question.answer}
             </Text> }
       </View>
@@ -50,15 +52,26 @@ export default class QuizView extends Component {
     const { currentView } = this.state
 
     return (
-      <View>
-        <TouchableOpacity onPress={this.handleCorrect}>
-          <Text>Correct</Text>
+      <View style={styles.buttons}>
+        <TouchableOpacity
+          style={styles.changeView}
+          onPress={this.handleChangeView}
+        >
+          <Text style={{ color: 'blue', fontSize: 18 }}>
+            View { currentView === 'question' ? 'Answer' : 'Question' }
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleIncorrect}>
-          <Text>Incorrect</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.handleCorrect}
+        >
+          <Text style={{ color: 'darkgreen', fontSize: 18 }}>Correct</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleChangeView}>
-          <Text>{ currentView === 'question' ? 'Answer' : 'Question' }</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.handleIncorrect}
+        >
+          <Text style={{ color: 'red', fontSize: 18 }}>Incorrect</Text>
         </TouchableOpacity>
       </View>
     )
@@ -82,14 +95,14 @@ export default class QuizView extends Component {
     const { numberCorrect } = this.state
 
     return (
-      <View>
-        <Text>
+      <View style={styles.quizOver}>
+        <Text style={styles.quizOverText}>
           Quiz Completed!
         </Text>
-        <Text>
+        <Text style={styles.quizOverScore}>
           You scored:
         </Text>
-        <Text>
+        <Text style={styles.quizOverNumber}>
           {numberCorrect} / {deck.questions.length} ({100 * (numberCorrect / deck.questions.length).toFixed(2)}%)
         </Text>
         <Button onPress={this.handleRetry} title="Retry" />
@@ -149,11 +162,15 @@ export default class QuizView extends Component {
     const currentQuestion = deck.questions[questionIndex]
 
     if (this.state.isQuizOver) {
-      return this.renderQuizOver()
+      return (
+        <View style={styles.mainContainer}>
+          {this.renderQuizOver()}
+        </View>
+      )
     }
 
     return (
-      <View>
+      <View style={styles.mainContainer}>
         { this.renderScore(totalNumQuestions) }
         { this.renderQuestion(currentQuestion) }
         { this.renderButtons() }

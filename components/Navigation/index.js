@@ -38,7 +38,16 @@ const Tabs = TabNavigator({
       },
       shadowRadius: 6,
       shadowOpacity: 1,
+      backgroundColor: 'teal',
     },
+    labelStyle: {
+      fontSize: 16,
+      display: 'flex',
+      alignItems: 'center',
+    },
+    inactiveTintColor: 'white',
+    activeTintColor: 'lightgrey',
+    activeBackgroundColor: '#10474E',
   },
 })
 

@@ -21,14 +21,14 @@ const Deck = ({ deck, navigation }) => {
       style={styles.listItem}
     >
       <TouchableOpacity
-        style={{ flex: 1 }}
+        style={styles.listItemInner}
         onPress={viewDetails}
       >
         <Text style={styles.deckTitle}>
           {deck.title}
         </Text>
         <Text style={styles.deckQuestions}>
-          {deck.questions.length} Question{deck.questions.length > 1 ? 's' : ''}
+          {deck.questions.length} Question{deck.questions.length !== 1 ? 's' : ''}
         </Text>
       </TouchableOpacity>
     </View>

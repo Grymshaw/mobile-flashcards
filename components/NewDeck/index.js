@@ -29,10 +29,16 @@ export default class NewDeck extends Component {
   }
 
   handleSubmit() {
+    const { navigation } = this.props
+
     saveDeckTitle(this.state.title)
-    this.setState({
-      title: '',
-    })
+      .then(() => {
+        this.setState({
+          title: '',
+        })
+
+        navigation.navigate('DeckList')
+      })
   }
 
   render() {
@@ -52,7 +58,7 @@ export default class NewDeck extends Component {
           style={styles.button}
           onPress={this.handleSubmit}
         >
-          <Text>Add Deck</Text>
+          <Text style={styles.buttonText}>Add Deck</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     )

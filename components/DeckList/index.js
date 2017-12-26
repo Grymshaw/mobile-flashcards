@@ -26,7 +26,10 @@ export default class DeckList extends Component {
   }
 
   updateDecks() {
-    getDecks()
+    this.setState({
+      loading: true,
+    })
+    return getDecks()
       .then((decks) => {
         const arr = decks
           ? Object.keys(decks).map(id => decks[id])
