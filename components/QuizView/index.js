@@ -22,12 +22,12 @@ export default class QuizView extends Component {
   }
 
   renderScore (totalQuestions) {
-    const { numberCorrect } = this.state
+    const { numberCorrect, questionIndex } = this.state
 
     return (
       <View style={styles.score}>
         <Text style={styles.scoreText}>
-          {numberCorrect} / {totalQuestions}
+          {questionIndex + 1} / {totalQuestions} ({totalQuestions - questionIndex} remaining)
         </Text>
       </View>
     )

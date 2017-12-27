@@ -19,6 +19,7 @@ const styles = {
     fontSize: 16,
   },
   mainTextView: {
+    marginTop: 10,
   },
   mainText: {
     fontSize: 20,
