@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import {
+  AsyncStorage,
   KeyboardAvoidingView,
   Text,
   TextInput,
   TouchableOpacity } from 'react-native'
 
 import styles from './styles'
-import { saveDeckTitle } from '../../utils/deckApi'
+import { getDeck, saveDeckTitle } from '../../utils/deckApi'
 
 export default class NewDeck extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -30,16 +31,20 @@ export default class NewDeck extends Component {
 
   handleSubmit() {
     const { navigation } = this.props
+    const { title } = this.state
 
-    if (this.state.title.length > 0) {
-      saveDeckTitle(this.state.title)
-      .then(() => {
-        this.setState({
-          title: '',
-        })
+    this.setState({
+      title: '',
+    })
 
-        navigation.navigate('DeckList')
-      })
+    if (title.length > 0) {
+      saveDeckTitle(title)
+        .then(() => (
+          getDeck(title)
+        ))
+        .then((deck) => (
+          navigation.navigate('DeckDetails', { deck })
+        ))
     }
   }
 
